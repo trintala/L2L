@@ -139,9 +139,10 @@ class Experiment(object):
             if kwargs.get('jube_parameter'):
                 if k not in kwargs.get('jube_parameter').keys():
                     self.traj.f_add_parameter_to_group("JUBE_params", k, v)
+                    all_jube_params[k] = v
             else:
                 self.traj.f_add_parameter_to_group("JUBE_params", k, v)
-            all_jube_params[k] = v
+                all_jube_params[k] = v
         print('JUBE parameters used: {}'.format(all_jube_params))
         return self.traj, all_jube_params
 
