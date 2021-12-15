@@ -31,7 +31,11 @@ Installing the L2L Package
 
 From the Top-Level directory of the directory, run the following command:
 
-    python3 setup.py install --user
+    python3 setup.py install develop --user
+    
+or alternatively 
+    
+    pip3 install -e . 
 
 *The `--user` flag is to be used if you wish to install in the user path as opposed
 to the root path (e.g. when one does not have sudo access)*
