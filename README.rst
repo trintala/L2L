@@ -31,7 +31,7 @@ Installing the L2L Package
 
 From the Top-Level directory of the directory, run the following command:
 
-    python3 setup.py install develop --user
+    python3 setup.py develop --user
     
 or alternatively 
     
