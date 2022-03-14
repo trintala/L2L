@@ -38,7 +38,7 @@ class Environment:
         :return: the results of running a whole generation. Dictionary indexed by generation id.
         """
         result = {}
-        for it in range(self.trajectory.par['n_iteration']):
+        for it in range(self.trajectory.individual.generation, self.trajectory.par['n_iteration']):
             if self.multiprocessing:
                 # Multiprocessing is done through JUBE, either with or without scheduler
                 logging.info("Environment run starting JUBERunner for n iterations: " + str(self.trajectory.par['n_iteration']))
