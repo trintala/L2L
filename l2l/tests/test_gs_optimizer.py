@@ -31,8 +31,8 @@ class GSOptimizerTestCase(OptimizerTestCase):
             self.fail(e.__name__)
         print(self.experiment.optimizer)
         best = self.experiment.optimizer.best_individual['coords']
-        self.assertEqual(best[0], 5)
-        self.assertEqual(best[1], 5)
+        self.assertEqual(best[0], 0)
+        self.assertEqual(best[1], 0)
         self.experiment.end_experiment(optimizer)
 
 
