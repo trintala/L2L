@@ -3,6 +3,7 @@
 
 .libs
 .deps
+.eggs
 *.orig
 
 **/*.swp
@@ -54,6 +55,7 @@ _build/
 
 # Package egg-info directory
 /Learning_to_Learn.egg-info
+L2L.egg-info
 
 # unison temp files
 **/.unison*
