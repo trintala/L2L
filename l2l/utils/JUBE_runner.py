@@ -100,7 +100,7 @@ class JUBERunner():
         f.write('    <parameter name="exec">' + self.executor + '</parameter>\n')
         f.write('    <parameter name="tasks_per_job">' + self.jube_config['tasks_per_job'] + '</parameter>\n')
         if self.scheduler != 'None':
-            jobfname = self.jube_config['job_file'] + '$index ' + str(generation)
+            jobfname = self.jube_config['job_file']# + '$index ' + str(generation)
             f.write('    <parameter name="submit_cmd">' + self.jube_config['submit_cmd'] + '</parameter>\n')
             f.write('    <parameter name="job_file">' + jobfname + '</parameter>\n')
             f.write('    <parameter name="nodes" type="int">' + self.jube_config['nodes'] + '</parameter>\n')
@@ -120,7 +120,7 @@ class JUBERunner():
 
         # Write the specific scheduler file
         if self.scheduler != 'None':
-            self.write_scheduler_file(f)
+            self.write_scheduler_file(f, generation)
 
         f.write('    <!-- Operation -->\n')
         f.write('    <step name="submit" work_dir="' + \
@@ -133,7 +133,7 @@ class JUBERunner():
             f.write('    <use>files,sub_job</use>\n')
             f.write('    <do done_file="' +
                     os.path.join(self.work_paths['ready_files'], 'ready_w_%s' % self.generation) +
-                    '">$submit_cmd $job_file </do> <!-- shell command -->\n')
+                    '">$submit_cmd ${job_file}_${index}_' + str(generation) + ' </do> <!-- shell command -->\n')
         else:
             f.write('    <do done_file="' +
                     os.path.join(self.work_paths['ready_files'], 'ready_w_%s' % self.generation) +
@@ -148,7 +148,7 @@ class JUBERunner():
         f.close()
         logger.info('Generated JUBE XML file for generation: ' + str(self.generation))
 
-    def write_scheduler_file(self, f):
+    def write_scheduler_file(self, f, generation):
         """
         Writes the scheduler specific part of the JUBE XML specification file
         :param f: the handle to the XML configuration file
@@ -160,7 +160,7 @@ class JUBERunner():
 
         f.write('    <!-- Substitute jobfile -->\n')
         f.write('    <substituteset name="sub_job">\n')
-        f.write('    <iofile in="${job_file}.in" out="$job_file" />\n')
+        f.write('    <iofile in="${job_file}.in" out="${job_file}_${index}_' + str(generation) + '" />\n')
         f.write('    <sub source="#NODES#" dest="$nodes" />\n')
         f.write('    <sub source="#PROCS_PER_NODE#" dest="$ppn" />\n')
         f.write('    <sub source="#WALLTIME#" dest="$walltime" />\n')
