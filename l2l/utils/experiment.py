@@ -117,7 +117,7 @@ class Experiment(object):
             "tasks_per_job": "1",
             "exec": "python3 " + os.path.join(self.paths.simulation_path,
                                               "run_files/run_optimizee.py"),
-            "ready_file": os.path.join(self.paths.root_dir_path,
+            "ready_file": os.path.join(self.paths.simulation_path, #root_dir_path,
                                        "ready_files/ready_w_"),
             "work_path": self.paths.root_dir_path,
             "paths_obj": self.paths,
