@@ -106,7 +106,7 @@ class JUBERunner():
             f.write('    <parameter name="nodes" type="int">' + self.jube_config['nodes'] + '</parameter>\n')
             f.write('    <parameter name="walltime">' + self.jube_config['walltime'] + '</parameter>\n')
             f.write('    <parameter name="ppn" type="int">' + self.jube_config['ppn'] + '</parameter>\n')
-            f.write('    <parameter name="ready_file_scheduler" mode="python" type="string"> ' +
+            f.write('    <parameter name="ready_file_scheduler" type="string"> ' +
                     os.path.join(self.work_paths['ready_files'], 'ready_${index} ') +
                     '</parameter>\n')
             f.write('    <parameter name="ready_file">' + self.jube_config['ready_file'] +
