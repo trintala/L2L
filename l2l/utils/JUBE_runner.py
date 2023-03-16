@@ -169,7 +169,7 @@ class JUBERunner():
         f.write('    <sub source="#MAIL_ADDRESS#" dest="$mail_address" />\n')
         f.write('    <sub source="#MAIL_MODE#" dest="$mail_mode" />\n')
         f.write('    <sub source="#EXEC#" dest="$exec $index ' + str(self.generation) + ' -n $tasks_per_job"/>\n')
-        f.write('    <sub source="#READY#" dest="$ready_file' + str(self.generation) + '" />\n')
+        f.write('    <sub source="#READY#" dest="$ready_file" />\n')
         f.write('    </substituteset> \n')
 
     def collect_results_from_run(self, generation, individuals):
