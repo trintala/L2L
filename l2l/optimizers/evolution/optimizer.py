@@ -13,7 +13,7 @@ logger = logging.getLogger("l2l-ga")
 
 GeneticAlgorithmParameters = namedtuple('GeneticAlgorithmParameters',
                                         ['seed', 'pop_size', 'cx_prob', 'mut_prob', 'n_iteration', 'ind_prob', 'tourn_size', 'mate_par',
-                                         'mut_par'])
+                                         'mut_par', 'hof_size'])
 GeneticAlgorithmParameters.__doc__ = """
 :param seed: Random seed
 :param pop_size: Size of the population
@@ -24,6 +24,7 @@ GeneticAlgorithmParameters.__doc__ = """
 :param tourn_size: Size of the tournamaent used for fitness evaluation and selection
 :param mate_par: Parameter used for blending two values during mating
 :param mut_par: Standard deviation for the gaussian addition mutation.
+:param hof_size: Hall of Fame size
 """
 
 
@@ -108,7 +109,7 @@ class GeneticAlgorithmOptimizer(Optimizer):
 
         self.g = 0  # the current generation
         self.toolbox = toolbox  # the DEAP toolbox
-        self.hall_of_fame = HallOfFame(20)
+        self.hall_of_fame = HallOfFame(parameters.hof_size)
         self.best_individual = None
 
         self._expand_trajectory(traj)
