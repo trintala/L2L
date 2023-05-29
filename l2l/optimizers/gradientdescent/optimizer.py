@@ -167,6 +167,7 @@ class GradientDescentOptimizer(Optimizer):
 
         # Storing the fitness of the current individual
         self.current_fitness = -np.Inf
+        self.previous_fitness = -np.Inf
         self.g = 0
         
         self.eval_pop = new_individual_list
@@ -239,7 +240,8 @@ class GradientDescentOptimizer(Optimizer):
 
         logger.info("-- End of iteration {}, current fitness is {} --".format(self.g, self.current_fitness))
 
-        if self.g < traj.n_iteration - 1 and traj.stop_criterion > self.current_fitness:
+        if self.g < traj.n_iteration - 1 and traj.stop_criterion > np.abs(self.previous_fitness - self.current_fitness):
+            self.previous_fitness = self.current_fitness
             # Create new individual using the appropriate gradient descent
             self.update_function(traj, np.dot(np.linalg.pinv(dx), fitnesses - self.current_fitness))
             current_individual_dict = list_to_dict(self.current_individual, self.optimizee_individual_dict_spec)
@@ -262,6 +264,10 @@ class GradientDescentOptimizer(Optimizer):
             self.eval_pop = new_individual_list
             self.g += 1  # Update generation counter
             self._expand_trajectory(traj)
+        else:
+            # TODO: handle this correctly, now this crashes the program.
+            # Handle in environment.run?
+            pass
 
     def end(self, traj):
         """
