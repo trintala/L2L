@@ -240,7 +240,7 @@ class GradientDescentOptimizer(Optimizer):
 
         logger.info("-- End of iteration {}, current fitness is {} --".format(self.g, self.current_fitness))
 
-        if self.g < traj.n_iteration - 1 and traj.stop_criterion > np.abs(self.previous_fitness - self.current_fitness):
+        if self.g < traj.n_iteration - 1 and traj.stop_criterion < np.abs(self.previous_fitness - self.current_fitness):
             self.previous_fitness = self.current_fitness
             # Create new individual using the appropriate gradient descent
             self.update_function(traj, np.dot(np.linalg.pinv(dx), fitnesses - self.current_fitness))
